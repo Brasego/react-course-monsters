@@ -18,7 +18,9 @@ export class App extends Component {
     fetch('https://jsonplaceholder.typicode.com/users').then(response => response.json()).then(users => this.setState({ monsters: users }))
   }
 
-  handleChange = (e) => { this.setState({ searchField: e.target.value }) }
+  //Using arrow function to define the method changes the scope to the class
+  handleChange = (e) => this.setState({ searchField: e.target.value })
+
 
   render() {
     const { monsters, searchField } = this.state
@@ -26,8 +28,8 @@ export class App extends Component {
 
     return (
       <div className="App">
-      <h1>Boorgir</h1>
-        <SearchBox handleChange={(e) => this.setState({ searchField: e.target.value })} placeholder="Search monsters" />
+        <h1>Boorgir</h1>
+        <SearchBox handleChange={(e) => this.handleChange(e)} placeholder="Search monsters" />
         <CardList monsters={filteredMonsters} />
       </div>
     );
